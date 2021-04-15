@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootswatch/dist/Superhero/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/Superhero/bootswatch";
+
+ @font-face {
+    font-family: gameplay;
+    src: url(assets/fonts/gameplay/Gameplay.ttf) format("opentype");
+  }
+
+  @font-face {
+    font-family: game;
+    src: url(assets/fonts/games/ARCADECLASSIC.TTF) format("opentype");
+  } 
+
+
+html, body { height: 100%;}
+body { margin: 0; font-family: game, "Helvetica Neue", sans-serif !important; }
+
