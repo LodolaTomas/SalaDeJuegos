@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
   onLogin() {
-    if (this.userForm.valid) {
       this.unUsuario.correo = this.userForm.value.email;
       this.unUsuario.clave = this.userForm.value.password;
       console.log(this.unUsuario);
@@ -41,12 +40,13 @@ export class LoginComponent implements OnInit {
             console.log('no Existe');
           }
         });
-    }
+    
   }
   
   public LoginRapido() {
-    this.userForm.value.email = '12345678';
-    this.userForm.value.password= "tomaslodola1@gmail.com";
+    this.userForm.value.password = '12345678';
+    this.userForm.value.email= "tomaslodola1@gmail.com";
+    this.onLogin();
   }
   isValidField(field: string): string {
     const validateField = this.userForm.get(field);
