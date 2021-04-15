@@ -43,7 +43,11 @@ export class LoginComponent implements OnInit {
         });
     }
   }
-
+  
+  public LoginRapido() {
+    this.userForm.value.email = '12345678';
+    this.userForm.value.password= "tomaslodola1@gmail.com";
+  }
   isValidField(field: string): string {
     const validateField = this.userForm.get(field);
     return !validateField.valid && validateField.touched
