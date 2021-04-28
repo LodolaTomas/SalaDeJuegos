@@ -11,6 +11,7 @@ import { UsuarioFireService } from 'src/app/services/usuarios.service';
 })
 export class LoginComponent implements OnInit {
   public unUsuario: Usuario;
+  public flag=false;
   userForm: FormGroup;
   private isEmail =/\S+@\S+\.\S+/;
   constructor(

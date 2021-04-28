@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -14,7 +15,7 @@ export class UsuarioFireService {
   referenciaAlaColeccion: AngularFirestoreCollection<Usuario>;
   referenciaBd: AngularFirestore;
 
-  constructor(private bd: AngularFirestore) {
+  constructor(private bd: AngularFirestore,private http: HttpClient) {
     this.referenciaBd = bd;
     this.referenciaAlaColeccion = bd.collection(this.rutaDeLaColeccion);
   }
@@ -34,4 +35,8 @@ export class UsuarioFireService {
       ref.where('correo', '==', user.correo).where('clave', '==', user.clave)
     );
   }
+public getProfileGitHub(){
+  return this.http.get('https://api.github.com/users/LodolaTomas')
+}
+
 }

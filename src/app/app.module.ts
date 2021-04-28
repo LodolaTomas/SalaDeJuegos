@@ -10,14 +10,22 @@ import { HomeComponent } from './component/home/home.component';
 import { QuiensoyComponent } from './component/quiensoy/quiensoy.component';
 import { ChatComponent } from './component/chat/chat.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { TictactoeComponent } from './component/tictactoe/tictactoe.component';
+import { TatetiPipe } from './component/tateti.pipe';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuiensoyComponent, ChatComponent, NavBarComponent],
+  declarations: [AppComponent, HomeComponent, QuiensoyComponent, ChatComponent, NavBarComponent, TictactoeComponent, TatetiPipe],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

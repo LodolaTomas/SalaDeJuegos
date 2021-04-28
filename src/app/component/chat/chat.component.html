@@ -1,2 +1,27 @@
 <app-nav-bar></app-nav-bar>
-<p>chat works!</p>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div >
+            <div *ngFor="let item of item$ | async">
+                <div class="col m12 col s12">
+                    <div *ngIf="item.usuario == token"class="alert alert-danger" role="alert">
+                        <p> {{ item.mensaje }} </p>
+                        <strong> {{ item.usuario }} </strong>&nbsp;
+                        <span class="date "> {{ item.hora }}</span>
+                    </div>
+                    <div *ngIf="item.usuario != token" class="alert alert-warning" role="alert">
+                        <p> {{ item.mensaje }} </p>
+                        <strong> {{ item.usuario }} </strong>&nbsp;
+                        <span class="date"> {{ item.hora }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <input type="text"
+ [(ngModel)]='mensaje.mensaje'
+ (click)='Enviar()'>
+
