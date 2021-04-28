@@ -14,10 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { TictactoeComponent } from './component/tictactoe/tictactoe.component';
-import { TatetiPipe } from './component/tateti.pipe';
+import { PiedrapapeltijeraComponent } from './component/piedrapapeltijera/piedrapapeltijera.component';
+import { RouterModule } from '@angular/router';
+import { MemotestComponent } from './component/memotest/memotest.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuiensoyComponent, ChatComponent, NavBarComponent, TictactoeComponent, TatetiPipe],
+  declarations: [AppComponent, HomeComponent, QuiensoyComponent, ChatComponent, NavBarComponent, TictactoeComponent, PiedrapapeltijeraComponent, MemotestComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -25,7 +27,7 @@ import { TatetiPipe } from './component/tateti.pipe';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

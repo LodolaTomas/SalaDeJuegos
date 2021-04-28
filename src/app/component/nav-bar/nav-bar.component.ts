@@ -20,10 +20,8 @@ export class NavBarComponent implements OnInit {
   }
 
   Deslogearse(){
-
     localStorage.removeItem('token');
     this.router.navigateByUrl("login");
-
   }
 
 }
