@@ -1,73 +1,39 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ViewChild,
-  AfterViewInit,
-  ViewChildren,
-  QueryList,
-  ElementRef,
-} from '@angular/core';
-import { Router } from '@angular/router';
-import { Mensaje } from '../../clases/mensaje';
-import { MensajeService } from './../../services/mensaje.service';
+import { Component, OnInit } from '@angular/core';
+import { MensajeService } from 'src/app/services/mensaje.service';
+import { Mensaje } from 'src/app/clases/mensaje';
 import { Observable } from 'rxjs';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements AfterViewInit, OnInit {
-  @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
-  @ViewChildren('item') itemElements: QueryList<any>;
-  mensaje: Mensaje;
-  item$: Observable<any[]>;
+export class ChatComponent implements OnInit {
   token: any;
-  mensaje3:string="";
-  d = new Date();
-  private scrollContainer: any;
+  mensaje: Mensaje;
+  lista: Observable<any[]>;
+  date = new Date();
 
-  constructor(
-    private router: Router,
-    private MiServicio: MensajeService,
-    firestore: MensajeService
-  ) {
+  constructor(private router: Router, private miServicio: MensajeService) {
     this.mensaje = new Mensaje();
-    this.item$ = firestore.ObtenerTodos().valueChanges();
-    this.mensaje.usuario = localStorage.getItem('token') || 'Anonimo';
-    this.mensaje.hora = this.d.getHours() + ':' + this.d.getMinutes();
+    this.mensaje.usuario = localStorage.getItem('token');
+    this.mensaje.hora = this.date.getHours() + ':' + this.date.getMinutes();
+    this.lista = miServicio.ObtenerTodos().valueChanges();
   }
-
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
+    console.log(this.token);
 
     if (this.token == null) {
-      this.router.navigateByUrl('login');
+      //this.router.navigateByUrl("/home");
     }
-    
   }
-
-  ngAfterViewInit() {
-    this.scrollContainer = this.scrollFrame.nativeElement;
-    this.itemElements.changes.subscribe((_) => this.onItemElementsChanged());
-  }
-
-  private onItemElementsChanged(): void {
-    this.scrollToBottom();
-  }
-
-  private scrollToBottom(): void {
-    this.scrollContainer.scroll({
-      top: this.scrollContainer.scrollHeight,
-      left: 0,
-      behavior: 'smooth',
+  Enviar() {
+    this.mensaje.usuario = localStorage.getItem('token');
+    this.miServicio.CrearUno(this.mensaje).then(() => {
+      console.log('Mensaje enviado!');
     });
   }
-
-  Enviar() {  
-    this.MiServicio.Crear(this.mensaje).then(() => {
-      this.mensaje.mensaje = '';
-    });
-  }}
-
+}

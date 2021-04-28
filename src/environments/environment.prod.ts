@@ -3,6 +3,7 @@ export const environment = {
   firebaseConfig : {
     apiKey: "AIzaSyAtrGOjgVOAAikoaOaSksqpfeUPhwv_nQ0",
     authDomain: "saladejuegos-b1a8e.firebaseapp.com",
+    databaseURL: "https://saladejuegos-b1a8e-default-rtdb.firebaseio.com",
     projectId: "saladejuegos-b1a8e",
     storageBucket: "saladejuegos-b1a8e.appspot.com",
     messagingSenderId: "416714409633",

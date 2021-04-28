@@ -1,27 +1,30 @@
 <app-nav-bar></app-nav-bar>
-
-
-<div class="container-fluid">
-    <div class="row">
-        <div >
-            <div *ngFor="let item of item$ | async">
-                <div class="col m12 col s12">
-                    <div *ngIf="item.usuario == token"class="alert alert-danger" role="alert">
-                        <p> {{ item.mensaje }} </p>
-                        <strong> {{ item.usuario }} </strong>&nbsp;
-                        <span class="date "> {{ item.hora }}</span>
+<div class="col-md-8 col-xl-6 chat">
+    <div class="card">
+        <div class="card-body msg_card_body">
+            <div *ngFor="let item of lista | async">
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_container_send">
+                            {{item.mensaje}}
+                            <span class="msg_time_send">{{item.hora}}</span>
+                            <span class="msg_user_send">{{item.usuario}}</span>
+                        </div>
                     </div>
-                    <div *ngIf="item.usuario != token" class="alert alert-warning" role="alert">
-                        <p> {{ item.mensaje }} </p>
-                        <strong> {{ item.usuario }} </strong>&nbsp;
-                        <span class="date"> {{ item.hora }}</span>
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="msg_container">
+                            {{item.mensaje}}
+                            <span class="msg_time">{{item.hora}}</span>
+                            <span class="msg_user">{{item.usuario}}</span>
+                        </div>
                     </div>
-                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Type.." [(ngModel)]="mensaje.mensaje">
+            <div class="input-group-append">
+                <button class="btn btn-outline-success" type="button" (click)="Enviar()">Send</button>
             </div>
         </div>
     </div>
 </div>
- <input type="text"
- [(ngModel)]='mensaje.mensaje'
- (click)='Enviar()'>
-
