@@ -30,7 +30,20 @@ export class RegisterComponent implements OnInit {
       this.unUsuario.correo = this.userForm.value.email;
       this.unUsuario.clave = this.userForm.value.password;
       this.usuarioSrv.Crear(this.unUsuario);
-      this.router.navigateByUrl('home');
+      this.usuarioSrv
+        .BuscarUsuario(this.unUsuario)
+        .valueChanges()
+        .subscribe((result) => {
+          if (result.length == 1) {
+            console.log('ERROR usuario ya registrado');
+          } else {
+            localStorage.setItem('token', this.unUsuario.correo);
+            this.usuarioSrv.Crear(this.unUsuario);
+            this.router.navigateByUrl('home');
+            console.log('Usuario registrado!');
+          }
+        });
+      
     }
   }
 

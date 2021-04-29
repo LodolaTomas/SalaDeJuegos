@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   
   public LoginRapido() {
     this.userForm.value.password = '12345678';
-    this.userForm.value.email= "tomaslodola1@gmail.com";
+    this.userForm.value.email= "el.octavio.villegas@gmail.com";
     this.onLogin();
   }
   isValidField(field: string): string {

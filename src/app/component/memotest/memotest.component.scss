@@ -84,7 +84,6 @@ body {
 .info {
   position: relative;
   width: 100%;
-  max-width: 950px;
 }
 
 // Sound control
@@ -143,7 +142,7 @@ body {
   font-size: 1rem;
   text-align: center;
   text-transform: uppercase;
-  color: white;
+  color: rgb(255, 255, 255);
   background-color: rgba(color(body), 0.8);
   z-index: 99;
   > * {
@@ -336,7 +335,7 @@ main {
   &:after {
     content: "";
     position: absolute;
-    top: $cardPadding*3;
+    top: 3px/* $cardPadding*3 */;
     left: $cardPadding;
     width: $p;
     height: $p;
