@@ -68,6 +68,8 @@ export class ChatComponent implements OnInit {
     }
     else if(this.app == 'ppt'){
       this.lista = this.miServicio.ObtenerTodosPPT().valueChanges();
+    }else if(this.app == 'juegoPropio'){
+      this.lista = this.miServicio.ObtenerTodosJuegoMio().valueChanges();
     }
   }
 
@@ -87,6 +89,10 @@ export class ChatComponent implements OnInit {
     }
     else if(this.app == 'memotest'){
       this.miServicio.CrearUnoMemotest(this.mensaje).then(() => {
+        console.log("Mensaje enviado Memotest!");
+      });
+    }else if(this.app == 'juegoPropio'){
+      this.miServicio.CrearUnoJuegoMio(this.mensaje).then(() => {
         console.log("Mensaje enviado Memotest!");
       });
     }

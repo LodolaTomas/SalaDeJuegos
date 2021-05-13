@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'chat', component:ChatComponent},
   {path:'piedrapapeltijera',component:PiedraPapeloTijeraComponent},
   {path: 'encuesta',component:EncuestaComponent},
-  {path:'buscaminas',component:BuscaminasComponent},
+  {path:'juegoPropio',component:BuscaminasComponent},
   {path: '',redirectTo: '/login', pathMatch: 'full' },
   {path: '**',redirectTo: '/login', pathMatch: 'full' },
 ];

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Scoresrpt } from 'src/app/clases/scoresrpt';
+import { GameRptService } from 'src/app/services/game-rpt.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
   @Component({
     selector: 'app-buscaminas',
     templateUrl: './buscaminas.component.html',
@@ -10,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   
     public tiles:string[];
     public moves:number = 0;
-  
+    scoreNuevo : Scoresrpt;
     public shuffleMoves:number = 0;
     public lv1Moves:number = 0;
     public lv2Moves:number = 0;
@@ -18,15 +20,15 @@ import { Component, OnInit } from '@angular/core';
   
     public selectedLevel:string = "";
   
-    
-    constructor() {
+    lista = this.gameSv.GetAll().valueChanges();
+    constructor(private gameSv : GameRptService) {
       this.tiles = [];
+      this.scoreNuevo = new Scoresrpt();
      }
   
     ngOnInit(): void {
       this.getTiles();
       this.disableButtons();
-      this.disableSaveScoreButton();
     }
   
     getTiles(){
@@ -42,7 +44,6 @@ import { Component, OnInit } from '@angular/core';
   
       if(this.checkTiles()){
         this.disableButtons();
-        this.enableSaveScoreButton();
         alert("You have turned all tiles to O in "+this.moves+" movements. congratulations!")
       }
   
@@ -58,18 +59,6 @@ import { Component, OnInit } from '@angular/core';
       for (let index = 0; index < 9; index++) {
         (<HTMLInputElement> document.getElementById("button"+(index+1))).disabled = false;
       }
-    }
-  
-    enableSaveScoreButton(){
-  
-      (<HTMLInputElement> document.getElementById("saveScoreButton")).disabled = false;
-  
-    }
-  
-    disableSaveScoreButton(){
-  
-      (<HTMLInputElement> document.getElementById("saveScoreButton")).disabled = true;
-  
     }
   
     checkTiles():boolean{
@@ -254,19 +243,42 @@ import { Component, OnInit } from '@angular/core';
           break;
       }
     }
+    
+    alert(icon: SweetAlertIcon, text: string) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
   
-    saveHighScore(){
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
   
-      /* this.highScore.shuffleMoves = this.shuffleMoves;
-      this.highScore.lv1Moves = this.lv1Moves;
-      this.highScore.lv2Moves = this.lv2Moves;
-      this.highScore.lv3Moves = this.lv3Moves;
-      this.highScore.date = (new Date()).toString();
-  
-      this.highScoreService.saveTilesScore(this.highScore); */
-  
-      this.disableSaveScoreButton();
-      
+      Toast.fire({
+        icon: icon,
+        title: text
+      })
     }
+    tableroGanadores(): void {
+      this.lista = this.gameSv.GetAll().valueChanges();
+  
+  
+      console.log(this.lista);
+    }
+  guardarScore(){
+    let sumaPuntos=this.lv1Moves+this.lv2Moves+this.lv3Moves;
+    if (sumaPuntos != 0) {
+      this.gameSv.AgregarScore(this.scoreNuevo);
+      this.alert('info', 'Puntaje guardado');
+    }
+    else {
+      this.alert('warning', 'Debes jugar primero');
+    }
+    
+  }
   }
   
