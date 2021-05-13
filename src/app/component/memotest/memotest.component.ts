@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Scoresrpt } from 'src/app/clases/scoresrpt';
+import { GameTatetiService } from 'src/app/services/game-tateti.service';
 declare var $: any;
 @Component({
   selector: 'app-memotest',
@@ -6,9 +8,15 @@ declare var $: any;
   styleUrls: ['./memotest.component.scss']
 })
 export class MemotestComponent implements OnInit {
+  scoreNuevo : Scoresrpt;
+  
+  constructor(private gamesrc : GameTatetiService) { 
+    this.scoreNuevo = new Scoresrpt();
+  }
+  guardarScore(){
+    this.gamesrc.AgregarScore(this.scoreNuevo);
 
-  constructor() { }
-
+  }
   ngOnInit(): void {
     var $board = $('main'),
     $card = $('.card'),
@@ -122,6 +130,7 @@ $card.on('click', function() {
   if ($('[' + dataMatch + '="true"]').length == $card.length) {
     // Show success screen
     $success.addClass(visibleClass);
+    this.scoreNuevo.score=attemptsCount;
     if (attemptsCount <= tooManyAttempts) {
       setTimeout(function() {
         if ($btnSound.hasClass(playSoundClass)) {
